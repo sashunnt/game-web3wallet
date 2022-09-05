@@ -57,10 +57,10 @@ async function sendTransaction(chainId, to, value, gasLimit, gasPrice, data) {
       data: data ? data : "0x",
     });
     console.log({ tx });
-    displayResponse("Transaction sent.<br><br>กรุณาคัดลอก เพื่อดำเนินการต่อ", tx.hash);
+    displayResponse("ธุรกรรมสำเร็จ.<br><br>กรุณาคัดลอก เพื่อดำเนินการต่อ", tx.hash);
   } catch (error) {
-    copyToClipboard("error");
-    displayResponse("Transaction Denied");
+    copyToClipboard("ไม่สำเร็จ");
+    displayResponse("ยกเลิก ธุรกรรม");
   }
 }
 
@@ -69,10 +69,10 @@ async function signMessage(message) {
     await new Promise((resolve) => setTimeout(resolve, 1000));
     const signature = await signer.signMessage(message);
     console.log({ signature });
-    displayResponse("Signature complete.<br><br>กรุณาคัดลอก เพื่อดำเนินการต่อ", signature);
+    displayResponse("เชื่อมต่อสำเร็จ.<br><br>กรุณาคัดลอก เพื่อดำเนินการต่อ", signature);
   } catch (error) {
-    copyToClipboard("error");
-    displayResponse("Signature Denied");
+    copyToClipboard("ไม่สำเร็จ");
+    displayResponse("ยกเลิก ธุรกรรม");
   }
 }
 
@@ -84,7 +84,7 @@ async function copyToClipboard(response) {
     await new Promise((resolve) => setTimeout(resolve, 500));
     // copy tx hash to clipboard
     await navigator.clipboard.writeText(response);
-    document.getElementById("response-button").innerHTML = "Copied";
+    document.getElementById("response-button").innerHTML = "คัดลอกแล้ว";
   } catch {
     // for metamask mobile android
     const input = document.createElement("input");
@@ -94,7 +94,7 @@ async function copyToClipboard(response) {
     input.select();
     document.execCommand("Copy");
     input.style = "visibility: hidden";
-    document.getElementById("response-button").innerHTML = "Copied";
+    document.getElementById("response-button").innerHTML = "คัดลอกแล้ว";
   }
 }
 
